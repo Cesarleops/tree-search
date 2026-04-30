@@ -1,0 +1,14 @@
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/bin/Debug/net10.0/treesearch
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/bin/Debug/net10.0/treesearch.deps.json
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/bin/Debug/net10.0/treesearch.runtimeconfig.json
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/bin/Debug/net10.0/treesearch.dll
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/bin/Debug/net10.0/treesearch.pdb
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/obj/Debug/net10.0/treesearch.GeneratedMSBuildEditorConfig.editorconfig
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/obj/Debug/net10.0/treesearch.AssemblyInfoInputs.cache
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/obj/Debug/net10.0/treesearch.AssemblyInfo.cs
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/obj/Debug/net10.0/treesearch.csproj.CoreCompileInputs.cache
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/obj/Debug/net10.0/treesearch.dll
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/obj/Debug/net10.0/refint/treesearch.dll
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/obj/Debug/net10.0/treesearch.pdb
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/obj/Debug/net10.0/treesearch.genruntimeconfig.cache
+/Users/cesarleyton/workspace/github.com/cesarleops/treesearch/obj/Debug/net10.0/ref/treesearch.dll
