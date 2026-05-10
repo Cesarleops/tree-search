@@ -12,7 +12,7 @@ controller.Create("D");
 controller.Create("E");
 Console.WriteLine("-------- NUESTRO ARCHIVO --------------- ");
 
-controller.Read("InOrder");
+controller.Read("BFS");
 
 
 controller.Delete("C");

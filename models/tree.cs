@@ -11,6 +11,9 @@ public class Tree
 
         switch (order)
         {
+            case "BFS":
+                path = BFS();
+                break;
             case "PreOrder":
                 preOrderWalk(this.root, path);
                 break;
@@ -123,7 +126,7 @@ public class Tree
         currentNode.name = minSucessor.name;
         currentNode.isFolder = minSucessor.isFolder;
         currentNode.right = Delete(minSucessor.name, currentNode.right);
-        
+
         return currentNode;
 
     }
@@ -137,7 +140,29 @@ public class Tree
         }
         return curr;
     }
-    
+
+    private List<string> BFS()
+    {
+        List<string> path = new List<string>();
+        Queue<FileNode> q = new Queue<FileNode>();
+        q.Enqueue(this.root);
+        while (q.Count > 0)
+        {
+            FileNode node = q.Dequeue();
+            path.Add(node.name);
+            if (node.left != null)
+            {
+                q.Enqueue(node.left);
+            }
+            if (node.right != null)
+            {
+                q.Enqueue(node.right);
+            }
+
+        }
+        return path;
+    }
+
     private void preOrderWalk(FileNode currNode, List<string> path)
     {
         if (currNode == null)
@@ -159,7 +184,7 @@ public class Tree
         postOrderWalk(currNode.left, path);
         postOrderWalk(currNode.right, path);
         path.Add(currNode.name);
-        
+
     }
 
     private void inOrderWalk(FileNode currNode, List<string> path)
