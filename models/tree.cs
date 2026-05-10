@@ -42,22 +42,27 @@ public class Tree
         return path;
     }
 
-    public DocumentNode Insert(DocumentNode currNode, DocumentNode newNode)
+    public DocumentNode Insert(DocumentNode currNode, DocumentNode newNode, out int comparisons)
     {
+        comparisons = 0;
+
         if (currNode == null)
         {
             return newNode;
         }
 
+        comparisons = 1;
         int comparison = DocumentNode.Compare(newNode.value.name, currNode.value.name);
 
         if (comparison < 0)
         {
-            currNode.left = Insert(currNode.left, newNode);
+            currNode.left = Insert(currNode.left, newNode, out int subComparisons);
+            comparisons += subComparisons;
         }
         else if (comparison > 0)
         {
-            currNode.right = Insert(currNode.right, newNode);
+            currNode.right = Insert(currNode.right, newNode, out int subComparisons);
+            comparisons += subComparisons;
         }
 
         return currNode;
@@ -72,7 +77,7 @@ public class Tree
 
         DocumentNode newNode = new DocumentNode(newFilename, false);
 
-        this.root = Insert(this.root, newNode);
+        this.root = Insert(this.root, newNode, out _);
         // Añadir un nuevo documento con el nuevo nombre para que quede actualizado.
         return this.root;
     }

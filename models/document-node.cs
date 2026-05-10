@@ -17,7 +17,7 @@ public class DocumentNode
 
     public static int Compare(string nameA, string nameB)
     {
-        return string.Compare(nameA, nameB);
+        return string.Compare(nameA, nameB, StringComparison.OrdinalIgnoreCase);
     }
 
 

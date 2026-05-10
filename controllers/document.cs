@@ -14,6 +14,12 @@ class DocumentController
     public void Create(string name, bool isFolder)
     {
         DocumentView view = new DocumentView();
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            view.showEmptyNameMessage();
+            return;
+        }
         
         if (!isUniqueName(name))
         {
@@ -28,7 +34,8 @@ class DocumentController
             DocumentTree.root = newNode;
             return;
         }
-        DocumentTree.Insert(DocumentTree.root, newNode);
+        DocumentTree.Insert(DocumentTree.root, newNode, out int comparisons);
+        view.showInsertComparisons(name, comparisons);
     }
 
     public void Read(string order)
@@ -41,6 +48,12 @@ class DocumentController
     public void Update(string currentName, string newName)
     {
         DocumentView view = new DocumentView();
+
+        if (string.IsNullOrWhiteSpace(currentName) || string.IsNullOrWhiteSpace(newName))
+        {
+            view.showEmptyNameMessage();
+            return;
+        }
         
         if (!isUniqueName(newName))
         {
@@ -54,6 +67,13 @@ class DocumentController
     public void Delete(string name)
     {
         DocumentView view = new DocumentView();
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            view.showEmptyNameMessage();
+            return;
+        }
+
         DocumentTree.root = DocumentTree.Delete(name, DocumentTree.root, out string deletionType);
         view.showDeletionType(name, deletionType);
     }
@@ -61,6 +81,13 @@ class DocumentController
     public void Search(string filename)
     {
         DocumentView view = new DocumentView();
+
+        if (string.IsNullOrWhiteSpace(filename))
+        {
+            view.showEmptyNameMessage();
+            return;
+        }
+
         DocumentNode result = DocumentTree.Search(filename, DocumentTree.root, out int comparisons);
         if (result != null)
         {
@@ -69,7 +96,6 @@ class DocumentController
         else
         {
             view.showComparisons(filename, comparisons, false);
-
         }
     }
 

@@ -14,18 +14,26 @@ public class DocumentView
         Console.WriteLine("El documento con nombre " + filename + "ya existe");
     }
 
+    public void showEmptyNameMessage()
+    {
+        Console.WriteLine("El nombre no puede estar vacío.");
+    }
+
     public void showComparisons(string filename, int comparisons, bool found)
     {
         if (found)
         {
             Console.WriteLine($"Se encontró '{filename}' después de {comparisons} comparaciones.");
-
         }
         else
         {
-            Console.WriteLine($"No Se encontró '{filename}' después de {comparisons} comparaciones.");
-
+            Console.WriteLine($"No se encontró '{filename}' después de {comparisons} comparaciones.");
         }
+    }
+
+    public void showInsertComparisons(string filename, int comparisons)
+    {
+        Console.WriteLine($"Se añadió '{filename}' después de {comparisons} comparaciones.");
     }
 
     public void showDeletionType(string name, string deletionType)
