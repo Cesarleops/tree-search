@@ -57,7 +57,7 @@ public class Tree
     {
 
         // Eliminar el documento que tenga el nombre
-        this.root = Delete(filename, this.root);
+        this.root = Delete(filename, this.root, out _);
 
         DocumentNode newNode = new DocumentNode(newFilename, false);
 
@@ -66,32 +66,40 @@ public class Tree
         return this.root;
     }
 
-    public DocumentNode Search(string filename, DocumentNode currentNode)
+    public DocumentNode Search(string filename, DocumentNode currentNode, out int comparisons)
     {
-
         if (currentNode == null)
         {
+            comparisons = 0;
             return null;
         }
+
+        comparisons = 1;
 
         if (currentNode.value.name == filename)
         {
             return currentNode;
         }
 
+        comparisons++;
+
         if (DocumentNode.Compare(filename, currentNode.value.name) < 0)
         {
-            return Search(filename, currentNode.left);
+            DocumentNode result = Search(filename, currentNode.left, out int subComparisons);
+            comparisons += subComparisons;
+            return result;
         }
         else
         {
-            return Search(filename, currentNode.right);
-
+            DocumentNode result = Search(filename, currentNode.right, out int subComparisons);
+            comparisons += subComparisons;
+            return result;
         }
     }
 
-    public DocumentNode Delete(string filename, DocumentNode currentNode)
+    public DocumentNode Delete(string filename, DocumentNode currentNode, out string deletionType)
     {
+        deletionType = "";
 
         if (currentNode == null)
         {
@@ -101,34 +109,38 @@ public class Tree
         int comparison = DocumentNode.Compare(filename, currentNode.value.name);
         if(comparison < 0)
         {
-            currentNode.left = Delete(filename, currentNode.left);
+            currentNode.left = Delete(filename, currentNode.left, out deletionType);
             return currentNode;
 
         }
         else if (comparison > 0)
         {
-            currentNode.right = Delete(filename, currentNode.right);
+            currentNode.right = Delete(filename, currentNode.right, out deletionType);
             return currentNode;
         }
 
         if (currentNode.IsLeaf())
         {
+            deletionType = "hoja";
             return null;
         }
 
         if (currentNode.right != null && currentNode.left == null)
         {
+            deletionType = "un hijo";
             return currentNode.right;
         }
 
         if (currentNode.left != null && currentNode.right == null)
         {
+            deletionType = "un hijo";
             return currentNode.left;
         }
 
+        deletionType = "dos hijos";
         DocumentNode minSuccessor = getMinSuccesor(currentNode.right);
         currentNode.value = minSuccessor.value;
-        currentNode.right = Delete(minSuccessor.value.name, currentNode.right);
+        currentNode.right = Delete(minSuccessor.value.name, currentNode.right, out _);
 
         return currentNode;
 

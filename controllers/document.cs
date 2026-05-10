@@ -53,16 +53,33 @@ class DocumentController
 
     public void Delete(string name)
     {
-        DocumentTree.Delete(name, DocumentTree.root);
+        DocumentView view = new DocumentView();
+        DocumentTree.root = DocumentTree.Delete(name, DocumentTree.root, out string deletionType);
+        view.showDeletionType(name, deletionType);
+    }
+
+    public void Search(string filename)
+    {
+        DocumentView view = new DocumentView();
+        DocumentNode result = DocumentTree.Search(filename, DocumentTree.root, out int comparisons);
+        if (result != null)
+        {
+            view.showComparisons(filename, comparisons, true);
+        }
+        else
+        {
+            view.showComparisons(filename, comparisons, false);
+
+        }
     }
 
 
 
     private bool isUniqueName(string newName)
     {
-        DocumentNode node = DocumentTree.Search(newName, DocumentTree.root);
-        if (node != null) return true;
-        return false;
+        DocumentNode node = DocumentTree.Search(newName, DocumentTree.root, out _);
+        if (node != null) return false;
+        return true;
     }
 
 }
