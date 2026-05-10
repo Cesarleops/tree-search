@@ -190,6 +190,7 @@ class DocumentController
         }
     }
 
+    // helper para revisar si ya hay un documento con el nombre que se pasa por parametro
     private bool isUniqueName(string newName)
     {
         DocumentNode node = DocumentTree.Search(newName, DocumentTree.root, out _);

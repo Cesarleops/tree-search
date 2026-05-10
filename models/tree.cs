@@ -15,9 +15,11 @@ public class Tree
         int rightHeight = Height(currNode.right);
         return 1 + Math.Max(leftHeight, rightHeight);
     }
-    
+// recorre el arbol basado en los diferentes tipos de recorrido    
 public List<string> Walk(string order)
     {
+        // cada recorrido añade los valores de los 
+        // nodos a el path a medida que los recorren
         List<string> path = new List<string>();
 
         switch (order)
@@ -74,6 +76,7 @@ public List<string> Walk(string order)
             return this.root;
         }
 
+        // al actualizar el nombre se mantiene si el nodo era una carpeta o no
         bool wasFolder = existingNode.value.isFolder;
 
         this.root = Delete(filename, this.root, out _);
@@ -162,6 +165,7 @@ public List<string> Walk(string order)
 
     }
 
+    // helper para obtener el sucesor minimo cuando el nodo a eliminar tiene dos hijos
     private DocumentNode getMinSuccesor(DocumentNode node)
     {
         DocumentNode curr = node;
