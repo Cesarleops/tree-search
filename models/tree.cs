@@ -5,6 +5,17 @@ public class Tree
 {
     public DocumentNode root;
 
+
+    public int Height(DocumentNode currNode)
+    {
+        if(currNode == null){
+            return 0;
+        }
+        int leftHeight = Height(currNode.left);
+        int rightHeight = Height(currNode.right);
+        return 1 + Math.Max(leftHeight, rightHeight);
+    }
+    
     public List<string> Walk(string order)
     {
         List<string> path = new List<string>();
@@ -15,7 +26,7 @@ public class Tree
                 path = BFS();
                 break;
             case "ascii":
-                printFolder(this.root,0);
+                printFolder(this.root, 0);
                 break;
             case "PreOrder":
                 preOrderWalk(this.root, path);
