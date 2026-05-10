@@ -29,9 +29,9 @@ class DocumentController
         view.show(path);
     }
 
-    public void Update(string name)
+    public void Update(string currentName, string newName)
     {
-
+        DocumentTree.Update(currentName, newName);
     }
 
     public void Delete(string name)

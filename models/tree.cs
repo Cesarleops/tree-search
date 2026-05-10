@@ -56,7 +56,7 @@ public class Tree
         // Eliminar el documento que tenga el nombre
         this.root = Delete(filename, this.root);
 
-        FileNode newNode = new FileNode(filename);
+        FileNode newNode = new FileNode(newFilename);
 
         this.root = Insert(this.root, newNode);
         // Añadir un nuevo documento con el nuevo nombre para que quede actualizado.
@@ -95,13 +95,14 @@ public class Tree
             return null;
         }
 
-        if (FileNode.Compare(filename, currentNode.name) < 0)
+        int comparison = FileNode.Compare(filename, currentNode.name)
+        if( comparison < 0)
         {
             currentNode.left = Delete(filename, currentNode.left);
             return currentNode;
 
         }
-        else if (FileNode.Compare(filename, currentNode.name) > 0)
+        else if (comparison > 0)
         {
             currentNode.right = Delete(filename, currentNode.right);
             return currentNode;

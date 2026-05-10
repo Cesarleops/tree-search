@@ -19,3 +19,9 @@ controller.Delete("C");
 
 Console.WriteLine("-------- NUESTRO ARCHIVO POST ELIMINACIÓN --------------- ");
 controller.Read("InOrder");
+
+controller.Update("A", "Z");
+
+Console.WriteLine("-------- NUESTRO ARCHIVO POST ACTU --------------- ");
+
+controller.Read("InOrder");
