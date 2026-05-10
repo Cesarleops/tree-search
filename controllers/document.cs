@@ -11,9 +11,18 @@ class DocumentController
         DocumentTree = new Tree();
     }
 
-    public void Create(string name)
+    public void Create(string name, bool isFolder)
     {
-        FileNode newNode = new FileNode(name);
+        DocumentView view = new DocumentView();
+        
+        if (!isUniqueName(name))
+        {
+            view.alreadyExistsMessage(name);
+            return;
+        }
+
+        DocumentNode newNode = new DocumentNode(name, isFolder);
+
         if (DocumentTree.root == null)
         {
             DocumentTree.root = newNode;
@@ -31,6 +40,14 @@ class DocumentController
 
     public void Update(string currentName, string newName)
     {
+        DocumentView view = new DocumentView();
+        
+        if (!isUniqueName(newName))
+        {
+            view.alreadyExistsMessage(newName);
+            return;
+        }
+
         DocumentTree.Update(currentName, newName);
     }
 
@@ -41,5 +58,11 @@ class DocumentController
 
 
 
+    private bool isUniqueName(string newName)
+    {
+        DocumentNode node = DocumentTree.Search(newName, DocumentTree.root);
+        if (node != null) return true;
+        return false;
+    }
 
 }

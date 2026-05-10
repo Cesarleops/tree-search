@@ -1,15 +1,14 @@
 namespace TreeSearch.Models;
 
-public class FileNode
+public class DocumentNode
 {
-    public string name; // nombre del archivo
-    public FileNode left;
-    public FileNode right;
-    public bool isFolder; 
+    public DocumentNode left;
+    public DocumentNode right;
+    public CompanyDocument value;
 
-    public FileNode(string fileName)
+    public DocumentNode(string fileName, bool isFolder)
     {
-        name = fileName;
+        value = new CompanyDocument(fileName, isFolder);
         left = null;
         right = null;
     }
