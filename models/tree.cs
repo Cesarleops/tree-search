@@ -1,7 +1,8 @@
 namespace TreeSearch.Models;
 
 
-class Tree {
+public class Tree
+{
     public FileNode root;
 
     public List<string> Walk(string order)
@@ -46,6 +47,97 @@ class Tree {
 
     }
 
+    public FileNode Update(string filename, string newFilename)
+    {
+
+        // Eliminar el documento que tenga el nombre
+        this.root = Delete(filename, this.root);
+
+        FileNode newNode = new FileNode(filename);
+
+        this.root = Insert(this.root, newNode);
+        // Añadir un nuevo documento con el nuevo nombre para que quede actualizado.
+        return this.root;
+    }
+
+    public FileNode Search(string filename, FileNode currentNode)
+    {
+
+        if (currentNode == null)
+        {
+            return null;
+        }
+
+        if (currentNode.name == filename)
+        {
+            return currentNode;
+        }
+
+        if (FileNode.Compare(filename, currentNode.name) < 0)
+        {
+            return Search(filename, currentNode.left);
+        }
+        else
+        {
+            return Search(filename, currentNode.right);
+
+        }
+    }
+
+    public FileNode Delete(string filename, FileNode currentNode)
+    {
+
+        if (currentNode == null)
+        {
+            return null;
+        }
+
+        if (FileNode.Compare(filename, currentNode.name) < 0)
+        {
+            currentNode.left = Delete(filename, currentNode.left);
+            return currentNode;
+
+        }
+        else if (FileNode.Compare(filename, currentNode.name) > 0)
+        {
+            currentNode.right = Delete(filename, currentNode.right);
+            return currentNode;
+        }
+
+        if (currentNode.IsLeaf())
+        {
+            return null;
+        }
+
+        if (currentNode.right != null && currentNode.left == null)
+        {
+            return currentNode.right;
+        }
+
+        if (currentNode.left != null && currentNode.right == null)
+        {
+            return currentNode.left;
+        }
+
+        FileNode minSucessor = getMinSuccesor(currentNode.right);
+        currentNode.name = minSucessor.name;
+        currentNode.isFolder = minSucessor.isFolder;
+        currentNode.right = Delete(minSucessor.name, currentNode.right);
+        
+        return currentNode;
+
+    }
+
+    private FileNode getMinSuccesor(FileNode node)
+    {
+        FileNode curr = node;
+        while (curr.left != null)
+        {
+            curr = curr.left;
+        }
+        return curr;
+    }
+    
     private void preOrderWalk(FileNode currNode, List<string> path)
     {
         if (currNode == null)
@@ -60,21 +152,24 @@ class Tree {
 
     private void postOrderWalk(FileNode currNode, List<string> path)
     {
-        if(currNode == null){
+        if (currNode == null)
+        {
             return;
         }
         postOrderWalk(currNode.left, path);
-        path.Add(currNode.name);
         postOrderWalk(currNode.right, path);
+        path.Add(currNode.name);
+        
     }
 
     private void inOrderWalk(FileNode currNode, List<string> path)
     {
-        if(currNode == null){
+        if (currNode == null)
+        {
             return;
         }
         inOrderWalk(currNode.left, path);
-        inOrderWalk(currNode.right, path);
         path.Add(currNode.name);
+        inOrderWalk(currNode.right, path);
     }
 }

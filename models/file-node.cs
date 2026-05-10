@@ -1,10 +1,11 @@
 namespace TreeSearch.Models;
 
-class FileNode
+public class FileNode
 {
     public string name; // nombre del archivo
-    private FileNode left;
-    private FileNode right;
+    public FileNode left;
+    public FileNode right;
+    public bool isFolder; 
 
     public FileNode(string fileName)
     {
@@ -21,4 +22,7 @@ class FileNode
     }
 
 
+    public bool IsLeaf(){
+        return this.left == null && this.right == null;
+    }
 }

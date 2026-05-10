@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("treesearch")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb59dc728fee563907ee5bce8038f461eba9ea6a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca957ec227058d4bface352ac71081130ea66730")]
 [assembly: System.Reflection.AssemblyProductAttribute("treesearch")]
 [assembly: System.Reflection.AssemblyTitleAttribute("treesearch")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
