@@ -66,6 +66,16 @@ public class DocumentView
         Console.WriteLine($"Se eliminó '{name}' que era un nodo tipo: {deletionType}.");
     }
 
+    public void showNotFoundMessage(string name)
+    {
+        Console.WriteLine($"No se encontró '{name}' para eliminar.");
+    }
+
+    public void showInsertRoot(string name)
+    {
+        Console.WriteLine($"Se insertó '{name}' como raíz del árbol.");
+    }
+
     public void showHeight(int height)
     {
         Console.WriteLine($"Altura del árbol: {height}");

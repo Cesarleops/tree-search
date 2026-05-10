@@ -106,10 +106,14 @@ class DocumentController
         if (DocumentTree.root == null)
         {
             DocumentTree.root = newNode;
+            view.showInsertRoot(name);
             return;
         }
         DocumentTree.Insert(DocumentTree.root, newNode, out int comparisons);
         view.showInsertComparisons(name, comparisons);
+        view.showTree(DocumentTree.root);
+        view.showHeight(DocumentTree.Height(DocumentTree.root));
+        
     }
 
     public void Read(string order)
@@ -139,6 +143,9 @@ class DocumentController
         }
 
         DocumentTree.Update(currentName, newName);
+        view.showTree(DocumentTree.root);
+        view.showHeight(DocumentTree.Height(DocumentTree.root));
+        
     }
 
     public void Delete(string name)
@@ -150,7 +157,18 @@ class DocumentController
         }
 
         DocumentTree.root = DocumentTree.Delete(name, DocumentTree.root, out string deletionType);
-        view.showDeletionType(name, deletionType);
+        if (string.IsNullOrEmpty(deletionType))
+        {
+            view.showNotFoundMessage(name);
+        }
+        else
+        {
+            view.showDeletionType(name, deletionType);
+        }
+        view.showTree(DocumentTree.root);
+        view.showHeight(DocumentTree.Height(DocumentTree.root));
+        
+        
     }
 
     public void Search(string filename)

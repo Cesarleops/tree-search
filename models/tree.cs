@@ -68,14 +68,19 @@ public List<string> Walk(string order)
 
     public DocumentNode Update(string filename, string newFilename)
     {
+        DocumentNode existingNode = Search(filename, this.root, out _);
+        if (existingNode == null)
+        {
+            return this.root;
+        }
 
-        // Eliminar el documento que tenga el nombre
+        bool wasFolder = existingNode.value.isFolder;
+
         this.root = Delete(filename, this.root, out _);
 
-        DocumentNode newNode = new DocumentNode(newFilename, false);
+        DocumentNode newNode = new DocumentNode(newFilename, wasFolder);
 
         this.root = Insert(this.root, newNode, out _);
-        // Añadir un nuevo documento con el nuevo nombre para que quede actualizado.
         return this.root;
     }
 
@@ -170,6 +175,10 @@ public List<string> Walk(string order)
     private List<string> BFS()
     {
         List<string> path = new List<string>();
+        if (this.root == null)
+        {
+            return path;
+        }
         Queue<DocumentNode> q = new Queue<DocumentNode>();
         q.Enqueue(this.root);
         while (q.Count > 0)
