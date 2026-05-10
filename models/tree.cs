@@ -89,12 +89,10 @@ public List<string> Walk(string order)
 
         comparisons = 1;
 
-        if (currentNode.value.name == filename)
+        if (DocumentNode.Compare(currentNode.value.name, filename) == 0)
         {
             return currentNode;
         }
-
-        comparisons++;
 
         if (DocumentNode.Compare(filename, currentNode.value.name) < 0)
         {
