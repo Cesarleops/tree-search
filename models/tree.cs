@@ -16,7 +16,7 @@ public class Tree
         return 1 + Math.Max(leftHeight, rightHeight);
     }
     
-    public List<string> Walk(string order)
+public List<string> Walk(string order)
     {
         List<string> path = new List<string>();
 
@@ -24,9 +24,6 @@ public class Tree
         {
             case "BFS":
                 path = BFS();
-                break;
-            case "ascii":
-                printFolder(this.root, 0);
                 break;
             case "PreOrder":
                 preOrderWalk(this.root, path);
@@ -170,19 +167,6 @@ public class Tree
             curr = curr.left;
         }
         return curr;
-    }
-
-    private void printFolder(DocumentNode node, int identation)
-    {
-        if (node == null)
-        {
-            return;
-        }
-        
-        Console.WriteLine("|--"+new string('-', identation) +  node.value.name);
-
-        printFolder(node.left, identation + 1);
-        printFolder(node.right, identation + 1);
     }
 
     private List<string> BFS()

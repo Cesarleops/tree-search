@@ -40,8 +40,15 @@ class DocumentController
 
     public void Read(string order)
     {
-        List<string> path = DocumentTree.Walk(order);
         DocumentView view = new DocumentView();
+
+        if (order == "ascii")
+        {
+            view.showTree(DocumentTree.root);
+            return;
+        }
+
+        List<string> path = DocumentTree.Walk(order);
         view.show(path);
     }
 

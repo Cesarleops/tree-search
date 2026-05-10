@@ -1,3 +1,5 @@
+using TreeSearch.Models;
+
 public class DocumentView
 {
 
@@ -9,9 +11,32 @@ public class DocumentView
         }
     }
 
+    public void showTree(DocumentNode root)
+    {
+        if (root == null)
+        {
+            Console.WriteLine("No hay ningún documento.");
+            return;
+        }
+        Console.WriteLine(root.value.name);
+        printNode(root.left, "", true);
+        printNode(root.right, "", false);
+    }
+
+    private void printNode(DocumentNode node, string prefix, bool isLeft)
+    {
+        if (node == null) return;
+
+        Console.WriteLine(prefix + (isLeft ? "├── " : "└── ") + node.value.name);
+
+        string newPrefix = prefix + (isLeft ? "│   " : "    ");
+        printNode(node.left, newPrefix, true);
+        printNode(node.right, newPrefix, false);
+    }
+
     public void alreadyExistsMessage(string filename)
     {
-        Console.WriteLine("El documento con nombre " + filename + "ya existe");
+        Console.WriteLine("El documento con nombre " + filename + " ya existe");
     }
 
     public void showEmptyNameMessage()
@@ -38,6 +63,11 @@ public class DocumentView
 
     public void showDeletionType(string name, string deletionType)
     {
-        Console.WriteLine($"Se eliminó '{name}' que era un nodo {deletionType}.");
+        Console.WriteLine($"Se eliminó '{name}' que era un nodo tipo: {deletionType}.");
+    }
+
+    public void showHeight(int height)
+    {
+        Console.WriteLine($"Altura del árbol: {height}");
     }
 }
